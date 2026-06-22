@@ -1,0 +1,195 @@
+<html>
+<head>
+
+<!-- Makes the page responsive on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Page title shown in browser tab -->
+<title>To Do List</title>
+<style>
+
+/* Styling for the whole page */
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+
+/* Center the box horizontally and vertically */
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+ background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMAJzNpLkpP21EvzmhHuY9Z03QlGcuhuBXx8XH_YpoAQdk3DRRHTDk-aI&s=10');
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+}
+
+/* Main container */
+.box {
+ width: 600px;
+ padding: 20px;
+ border-radius: 10px;
+ text-align: center;
+ background-color: rgba(255,255,255,0.5);
+ position: relative;
+ transition: 0.3s; 
+ }
+.box:hover{
+ box-shadow: 0 0 15px gray;
+ transform: translateY(-5px);
+ }
+/* Input textbox styling */
+ input {
+ width: 65%;
+ padding: 8px;
+ border-radius: 5px;
+ }
+/* Input focus */
+ input:focus {
+ outline: 2px solid blue;
+ }
+
+/* button styling */
+ button {
+ padding: 8px;
+ cursor: pointer;
+ background-color: violet;
+ }
+
+/*pseudo class  */
+ button:hover {
+ background-color: gray;
+ }
+
+/* Table styling */
+ table {
+ width: 100%;
+ margin-top: 15px;
+ border-collapse: collapse;
+ background-color: white;
+ }
+
+ /* Table */
+ th,
+ td {
+ border: 1px solid black;
+ padding: 10px;
+ text-align: center;
+ }
+
+ /* Header row */
+ th {
+ background-color: lightblue;
+ }
+
+ /* Completed task */
+ .done {
+ text-decoration: line-through;
+ color: green;
+ }
+ </style>
+ </head>
+ <body>
+
+ <!-- Main To-Do container -->
+ <div class="box">
+
+ <h1>To Do List</h1>
+ <input type="text" id="task" placeholder="Enter task">
+ <button id="add">Add</button>
+
+ <!-- Task table -->
+ <table>
+ <thead>
+ <tr>
+ <th>Task</th>
+ <th>Status</th>
+ <th>Action</th>
+ </tr>
+ </thead>
+
+ <!-- New tasks will be added here -->
+ <tbody id="tableBody"></tbody>
+ </table>
+ </div>
+ <script>
+
+ // DOM MODEL
+  let task = document.getElementById("task");
+
+ // Get the table body element
+  let tableBody = document.getElementById("tableBody");
+
+  // eventlistener
+  document.getElementById("add").addEventListener("click", function () {
+  if (task.value.trim() === "") {
+  return;
+  }
+
+  // Create a new table row
+  let row = `
+  <tr>
+  <td>${task.value}</td>
+  <td>
+  <button onclick="toggleStatus(this)">
+  Pending
+  </button>
+  </td>
+
+  <!-- Delete button column -->
+  <td>
+  <button onclick="deleteTask(this)">
+  Delete
+  </button>
+  </td>
+  </tr>
+  `;
+  // To Add row in table
+  tableBody.innerHTML += row;
+  // Saves data in local storage
+  save();
+  task.value = "";
+  });
+
+  // Function to mark task status
+  function toggleStatus(btn) {
+
+  // Get first cell (task name)
+  let taskCell =
+  btn.parentElement.parentElement.children[0];
+
+  // Toggles completed class
+  taskCell.classList.toggle("done");
+  if (taskCell.classList.contains("done")) {
+
+  // Updates the button
+  btn.innerText = "Completed";
+  }
+  else {
+  btn.innerText = "Pending";
+  }
+
+  // Saves the updates
+  save();
+  }
+
+  // Function to delete task
+  function deleteTask(btn) {
+
+  // Remove entire row
+  btn.parentElement.parentElement.remove();
+
+  // Save updated table
+  save();
+  }
+  function save() { 
+
+  // Stores table content in local storage
+  localStorage.tasks = tableBody.innerHTML;
+  }
+
+  // Load saved tasks when page opens
+  tableBody.innerHTML = localStorage.tasks || "";
+  </script>
+  </body>
+  </html>
