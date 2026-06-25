@@ -18,31 +18,30 @@ font-family: Arial, sans-serif;
  justify-content: center;
  align-items: center;
  height: 100vh;
- background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMAJzNpLkpP21EvzmhHuY9Z03QlGcuhuBXx8XH_YpoAQdk3DRRHTDk-aI&s=10');
- background-position: center;
- background-repeat: no-repeat;
+ background:linear-gradient(135deg,#4f46e5,#7c3aed,#ec4899);
  background-size: cover;
+ animation:gradientMove 10s ease infinite;
 }
-
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 /* Main container */
 .box {
  width: 600px;
- padding: 20px;
- border-radius: 10px;
- text-align: center;
- background-color: rgba(255,255,255,0.5);
- position: relative;
- transition: 0.3s; 
- }
-.box:hover{
- box-shadow: 0 0 15px gray;
- transform: translateY(-5px);
- }
+ background:rgba(255,255,255,0.12);
+ backdrop-filter:blur(15px);
+ border:1px solid rgba(255,255,255,0.2);
+ border-radius:25px;
+ padding:30px;
+ box-shadow:0 10px 40px rgba(0,0,0,0.25);
+}
 /* Input textbox styling */
  input {
  width: 65%;
  padding: 8px;
- border-radius: 5px;
+ border-radius: 12px;
  }
 /* Input focus */
  input:focus {
@@ -50,43 +49,79 @@ font-family: Arial, sans-serif;
  }
 
 /* button styling */
- button {
- padding: 8px;
+ button{
+ background-color: #6a0dad; 
+ color: white;
+ border: none;
+ padding: 12px 24px;
+ border-radius: 8px;
  cursor: pointer;
- background-color: violet;
+ font-size: 16px;
+ font-weight: 500;
+ transition: 0.3s ease;
+}
+/* pseudo classes /*
+button:hover{
+background-color: #7b1fa2;
+}
+button:active{
+background-color: #4b0082;
+transform: scale(0.97);
  }
 
-/*pseudo class  */
- button:hover {
- background-color: gray;
- }
+/* Table Styling */
+table{
+width:100%;
+margin-top:15px;
+border-collapse:collapse;
+overflow:hidden;
+border-radius:12px;
+box-shadow:0 6px 18px rgba(79,70,229,0.25);
+background:white;
+}
 
-/* Table styling */
- table {
- width: 100%;
- margin-top: 15px;
- border-collapse: collapse;
- background-color: white;
- }
+/* Table Header */
+th{
+background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+color:white;
+padding:14px;
+text-align:center;
+font-size:16px;
+letter-spacing:0.5px;
+}
 
- /* Table */
- th,
- td {
- border: 1px solid black;
- padding: 10px;
- text-align: center;
- }
+/* Table Cells */
+td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid #e5e7eb;
+transition:0.3s;
+}
 
- /* Header row */
- th {
- background-color: lightblue;
- }
+/* Hover Effect */
+tr:hover{
+background:#f3f4ff;
+}
 
- /* Completed task */
- .done {
- text-decoration: line-through;
- color: green;
- }
+/* Alternate Rows */
+tr:nth-child(even){
+background:#faf5ff;
+}
+
+/* Completed Task */
+.done{
+ text-decoration:line-through;
+ color:#16a34a;
+ font-weight:600;
+ position:relative;
+}
+
+/* Completed Task Icon */
+.done::before{
+ content:"✔ ";
+ lor:#22c55e;
+ font-weight:bold;
+}
  </style>
  </head>
  <body>
