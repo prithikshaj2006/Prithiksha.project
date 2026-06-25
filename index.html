@@ -1,227 +1,1063 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 
-<!-- Makes the page responsive on mobile devices -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Sets character encoding -->
+<meta charset="UTF-8">
 
-<!-- Page title shown in browser tab -->
-<title>To Do List</title>
+
+<!-- Makes website responsive on mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<!-- Browser tab title -->
+<title>Modern Todo List</title>
+
+
 <style>
 
-/* Styling for the whole page */
-body {
-margin: 0;
-font-family: Arial, sans-serif;
+/* ==========================
+   BASIC PAGE SETTINGS
+========================== */
 
-/* Center the box horizontally and vertically */
- height: 100vh;
- background:linear-gradient(135deg,#4f46e5,#7c3aed,#ec4899);
- background-size: cover;
- animation:gradientMove 10s ease infinite;
-}
-@keyframes gradientMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-/* Main container */
-.box {
- width: 600px;
- background:rgba(255,255,255,0.12);
- backdrop-filter:blur(15px);
- border:1px solid rgba(255,255,255,0.2);
- border-radius:25px;
- padding:30px;
- box-shadow:0 10px 40px rgba(0,0,0,0.25);
-}
-/* Input textbox styling */
- input {
- width: 65%;
- padding: 8px;
- border-radius: 12px;
- }
-/* Input focus */
- input:focus {
- outline: 2px solid blue;
- }
+*{
 
-/* button styling */
- button{
- background-color: #6a0dad; 
- color: white;
- border: none;
- padding: 12px 24px;
- border-radius: 8px;
- cursor: pointer;
- font-size: 16px;
- font-weight: 500;
- transition: 0.3s ease;
+    /* Remove default spacing */
+    margin:0;
+
+    padding:0;
+
+
+    /* Include padding and border in size */
+    box-sizing:border-box;
+
+
+    /* Default font */
+    font-family:Arial,sans-serif;
+
 }
-/* pseudo classes /*
+
+
+
+/* ==========================
+   BODY BACKGROUND
+========================== */
+
+body{
+
+
+    /* Full screen height */
+    min-height:100vh;
+
+
+    /* Center container */
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    /* Space around container */
+    padding:20px;
+
+
+
+    /* Blue purple gradient */
+    background:
+    linear-gradient(
+        135deg,
+        #1e1b4b,
+        #6d28d9,
+        #2563eb
+    );
+
+
+
+    /* Smooth gradient animation */
+    background-size:300% 300%;
+
+
+    animation:bgAnimation 10s infinite;
+
+}
+
+
+
+
+
+/* Background movement */
+
+@keyframes bgAnimation{
+
+
+0%{
+
+background-position:0% 50%;
+
+}
+
+
+50%{
+
+background-position:100% 50%;
+
+}
+
+
+100%{
+
+background-position:0% 50%;
+
+}
+
+
+}
+
+
+
+
+
+
+/* ==========================
+   MAIN TODO BOX
+========================== */
+
+
+.container{
+
+
+    /* Box width */
+    width:650px;
+
+
+    /* Responsive width */
+    max-width:100%;
+
+
+
+    /* Glass effect */
+    background:
+    rgba(255,255,255,0.15);
+
+
+
+    backdrop-filter:blur(15px);
+
+
+
+    /* Space inside */
+    padding:30px;
+
+
+
+    /* Rounded corners */
+    border-radius:25px;
+
+
+
+    /* Shadow */
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.35);
+
+
+}
+
+
+
+
+
+
+
+/* Heading */
+
+h1{
+
+
+    text-align:center;
+
+
+    color:white;
+
+
+    margin-bottom:25px;
+
+}
+
+
+
+
+
+/* ==========================
+   INPUT AREA
+========================== */
+
+
+.input-area{
+
+
+    /* Put input and button in row */
+    display:flex;
+
+
+    gap:10px;
+
+
+}
+
+
+
+
+/* Input box */
+
+
+input{
+
+
+    /* Takes remaining space */
+    flex:1;
+
+
+
+    padding:13px;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    border-radius:12px;
+
+
+    font-size:16px;
+
+}
+
+
+
+
+/* When input clicked */
+
+input:focus{
+
+
+    box-shadow:
+
+    0 0 15px #c084fc;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   BUTTON STYLE
+========================== */
+
+
+button{
+
+
+    padding:12px 18px;
+
+
+    border:none;
+
+
+    border-radius:12px;
+
+
+    cursor:pointer;
+
+
+    color:white;
+
+
+    font-weight:bold;
+
+
+
+    /* Purple gradient */
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #7c3aed,
+    #2563eb
+    );
+
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+
+/* Mouse hover */
+
 button:hover{
-background-color: #7b1fa2;
+
+
+    transform:translateY(-3px);
+
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.3);
+
+
 }
+
+
+
+
+
+/* Button click */
+
 button:active{
-background-color: #4b0082;
-transform: scale(0.97);
- }
 
-/* Table Styling */
+
+    transform:scale(.95);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   TABLE DESIGN
+========================== */
+
+
 table{
-width:100%;
-margin-top:15px;
-border-collapse:collapse;
-overflow:hidden;
-border-radius:12px;
-box-shadow:0 6px 18px rgba(79,70,229,0.25);
-background:white;
+
+
+    width:100%;
+
+
+    margin-top:25px;
+
+
+    border-collapse:separate;
+
+
+    border-spacing:0;
+
+
+    overflow:hidden;
+
+
+    border-radius:15px;
+
+
+    background:white;
+
+
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.3);
+
+
 }
 
-/* Table Header */
+
+
+
+
+
+
+/* Table heading */
+
 th{
-background:linear-gradient(135deg,#3b82f6,#8b5cf6);
-color:white;
-padding:14px;
-text-align:center;
-font-size:16px;
-letter-spacing:0.5px;
+
+
+    padding:15px;
+
+
+    color:white;
+
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #9333ea
+    );
+
 }
 
-/* Table Cells */
+
+
+ /* Table data */
+
+
 td{
-padding:12px;
-text-align:center;
-border-bottom:1px solid #e5e7eb;
-transition:0.3s;
+
+
+    padding:12px;
+
+
+    text-align:center;
+
+
+    border-bottom:1px solid #ddd;
+
+
+    color:#333;
+
+
 }
 
-/* Hover Effect */
-tr:hover{
-background:#f3f4ff;
+
+
+
+
+
+/* Row hover effect */
+
+tr:hover td{
+
+
+    background:#ede9fe;
+
+
 }
 
-/* Alternate Rows */
-tr:nth-child(even){
-background:#faf5ff;
+
+
+
+
+
+/* Alternate row color */
+
+tr:nth-child(even) td{
+
+
+    background:#faf5ff;
+
+
 }
 
-/* Completed Task */
+
+
+
+
+
+
+/* ==========================
+   COMPLETED TASK
+========================== */
+
+
 .done{
- text-decoration:line-through;
- color:#16a34a;
- font-weight:600;
- position:relative;
+
+
+    /* Strike completed task */
+
+    text-decoration:line-through;
+
+
+
+    color:#16a34a;
+
+
+
+    font-weight:bold;
+
+
 }
 
-/* Completed Task Icon */
+
+
+
+/* Add tick before completed */
+
 .done::before{
- content:"✔ ";
- lor:#22c55e;
- font-weight:bold;
+
+
+    content:"✔ ";
+
+
+    color:#22c55e;
+
+
 }
- </style>
- </head>
- <body>
 
- <!-- Main To-Do container -->
- <div class="box">
 
- <h1>To Do List</h1>
- <input type="text" id="task" placeholder="Enter task">
- <button id="add">Add</button>
 
- <!-- Task table -->
- <table>
- <thead>
- <tr>
- <th>Task</th>
- <th>Status</th>
- <th>Action</th>
- </tr>
- </thead>
 
- <!-- New tasks will be added here -->
- <tbody id="tableBody"></tbody>
- </table>
- </div>
- <script>
 
- // DOM MODEL
-  let task = document.getElementById("task");
 
- // Get the table body element
-  let tableBody = document.getElementById("tableBody");
+/* Delete button */
 
-  // eventlistener
-  document.getElementById("add").addEventListener("click", function () {
-  if (task.value.trim() === "") {
-  return;
-  }
+.delete{
 
-  // Create a new table row
-  let row = `
-  <tr>
-  <td>${task.value}</td>
-  <td>
-  <button onclick="toggleStatus(this)">
-  Pending
-  </button>
-  </td>
 
-  <!-- Delete button column -->
-  <td>
-  <button onclick="deleteTask(this)">
-  Delete
-  </button>
-  </td>
-  </tr>
-  `;
-  // To Add row in table
-  tableBody.innerHTML += row;
-  // Saves data in local storage
-  save();
-  task.value = "";
-  });
+    background:#ef4444;
 
-  // Function to mark task status
-  function toggleStatus(btn) {
 
-  // Get first cell (task name)
-  let taskCell =
-  btn.parentElement.parentElement.children[0];
+}
 
-  // Toggles completed class
-  taskCell.classList.toggle("done");
-  if (taskCell.classList.contains("done")) {
 
-  // Updates the button
-  btn.innerText = "Completed";
-  }
-  else {
-  btn.innerText = "Pending";
-  }
 
-  // Saves the updates
-  save();
-  }
+/* Delete hover */
 
-  // Function to delete task
-  function deleteTask(btn) {
+.delete:hover{
 
-  // Remove entire row
-  btn.parentElement.parentElement.remove();
 
-  // Save updated table
-  save();
-  }
-  function save() { 
+    background:#dc2626;
 
-  // Stores table content in local storage
-  localStorage.tasks = tableBody.innerHTML;
-  }
 
-  // Load saved tasks when page opens
-  tableBody.innerHTML = localStorage.tasks || "";
-  </script>
-  </body>
-  </html>
+}
+
+
+
+
+
+
+/* Small buttons */
+
+.small-btn{
+
+
+    padding:8px 12px;
+
+
+    font-size:13px;
+
+
+}
+
+
+
+
+
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+
+
+@media(max-width:600px){
+
+
+    /* Stack input and button */
+
+    .input-area{
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    button{
+
+
+        width:100%;
+
+
+    }
+
+
+
+    th,td{
+
+
+        font-size:13px;
+
+
+        padding:9px;
+
+
+    }
+
+
+
+    .container{
+
+
+        padding:20px;
+
+
+    }
+
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+
+
+
+<body>
+
+
+
+
+<!-- Main Todo Container -->
+
+<div class="container">
+
+
+
+<!-- Page title -->
+
+<h1>✨ Todo List</h1>
+
+
+
+
+
+
+<!-- Input and Add button -->
+
+<div class="input-area">
+
+
+<!-- User enters task here -->
+
+<input
+type="text"
+id="taskInput"
+placeholder="Enter task">
+
+
+
+<!-- Add task button -->
+
+<button id="addBtn">
+
+Add Task
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- Task table -->
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<!-- Table headings -->
+
+<th>Task</th>
+
+
+<th>Status</th>
+
+
+<th>Action</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<!-- JavaScript adds tasks here -->
+
+<tbody id="taskList">
+
+
+</tbody>
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+
+// ==========================
+// GET HTML ELEMENTS
+// ==========================
+
+
+// Input box
+
+const input =
+document.getElementById("taskInput");
+
+
+// Add button
+
+const addBtn =
+document.getElementById("addBtn");
+
+
+// Table body
+
+const list =
+document.getElementById("taskList");
+
+
+
+
+
+// ==========================
+// LOAD SAVED TASKS
+// ==========================
+
+
+list.innerHTML =
+
+localStorage.getItem("tasks") || "";
+
+
+
+
+
+
+
+
+// ==========================
+// ADD BUTTON EVENT
+// ==========================
+
+
+addBtn.addEventListener(
+"click",
+addTask
+);
+
+
+
+
+
+// Press Enter to add task
+
+input.addEventListener(
+"keypress",
+function(e){
+
+
+if(e.key==="Enter"){
+
+
+addTask();
+
+
+}
+
+
+});
+
+
+
+
+
+
+
+// ==========================
+// ADD TASK FUNCTION
+// ==========================
+
+
+function addTask(){
+
+
+
+// Get input value
+
+let text =
+input.value.trim();
+
+
+
+
+
+// Empty check
+
+if(text===""){
+
+
+alert("Enter a task");
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+// Create table row
+
+
+let row =
+document.createElement("tr");
+
+
+
+
+
+
+// Add row content
+
+
+row.innerHTML = `
+
+
+<td>${text}</td>
+
+
+<td>
+
+<button 
+class="small-btn"
+onclick="completeTask(this)">
+
+Pending
+
+</button>
+
+</td>
+
+
+<td>
+
+<button
+class="small-btn delete"
+onclick="deleteTask(this)">
+
+Delete
+
+</button>
+
+
+</td>
+
+
+`;
+
+
+
+
+
+
+// Add row to table
+
+list.appendChild(row);
+
+
+
+
+
+
+// Save data
+
+save();
+
+
+
+
+// Clear input
+
+input.value="";
+
+
+
+}
+
+
+
+
+
+
+
+
+// ==========================
+// COMPLETE TASK
+// ==========================
+
+
+function completeTask(btn){
+
+
+
+// Find task cell
+
+let task =
+
+btn.parentElement
+.parentElement
+.children[0];
+
+
+
+
+
+
+// Add/remove done class
+
+task.classList.toggle("done");
+
+
+
+
+
+
+// Change button text
+
+if(task.classList.contains("done")){
+
+
+btn.innerHTML="Completed";
+
+
+}
+
+else{
+
+
+btn.innerHTML="Pending";
+
+
+}
+
+
+
+
+
+
+// Save update
+
+save();
+
+
+}
+
+
+
+
+
+
+
+
+// ==========================
+// DELETE TASK
+// ==========================
+
+
+function deleteTask(btn){
+
+
+
+// Remove complete row
+
+btn.parentElement
+.parentElement
+.remove();
+
+
+
+
+// Save changes
+
+save();
+
+
+}
+
+
+
+
+
+
+
+
+// ==========================
+// LOCAL STORAGE SAVE
+// ==========================
+
+
+function save(){
+
+
+
+localStorage.setItem(
+
+"tasks",
+
+list.innerHTML
+
+);
+
+
+}
+
+
+
+</script>
+
+
+
+
+</body>
+
+</html>
